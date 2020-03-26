@@ -1,34 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction } from './actions/simpleAction';
+import { loginAction } from './actions/loginAction';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  simpleAction = (event) => {
-    this.props.simpleAction();
+
+  constructor(props) {
+    super(props);
+    this.state = { username: '', password: '' };
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    let { username, password } = this.state;
+    this.props.loginAction(username, password);
+    this.setState({ username: '', password: '' });
   }
 
   render() {
+    let { username, password } = this.state;
+    let { loginReducer: { isLoginPending, isLoginSuccess, loginError } } = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          
+          <form name="loginForm" onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Username</label>
+              <input name="username" onChange={e => this.setState({username: e.target.value})} value={username}></input>
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input type="passsword" name="password" onChange={e => this.setState({password: e.target.value})} value={password}></input>
+            </div>
+
+            <input type="submit" value="Login"></input>
+          </form>
+          
           <div>
             <pre>{JSON.stringify(this.props)}</pre>
-            <button onClick={this.simpleAction}>Test Redux Action</button>
           </div>
+
+          { isLoginPending && <div>Please wait...</div> }
+          { isLoginSuccess && <div>Success.</div> }
+          { loginError && <div>{loginError.message}</div> }
         </header>
       </div>
     );
@@ -40,7 +59,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
+  loginAction: (username, password) => dispatch(loginAction(username, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps) (App);
