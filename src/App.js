@@ -27,7 +27,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           
-          <form name="loginForm" onSubmit={this.onSubmit}>
+          <form className="form" name="loginForm" onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Username</label>
               <input name="username" onChange={e => this.setState({username: e.target.value})} value={username}></input>

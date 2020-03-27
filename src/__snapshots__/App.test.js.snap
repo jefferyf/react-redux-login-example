@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests renders correctly 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <form
+      className="form"
+      name="loginForm"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-group"
+      >
+        <label>
+          Username
+        </label>
+        <input
+          name="username"
+          onChange={[Function]}
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label>
+          Password
+        </label>
+        <input
+          name="password"
+          onChange={[Function]}
+          type="passsword"
+          value=""
+        />
+      </div>
+      <input
+        type="submit"
+        value="Login"
+      />
+    </form>
+    <div>
+      <pre>
+        {"loginReducer":{"isLoginPending":false,"isLoginSuccess":false,"loginError":null}}
+      </pre>
+    </div>
+  </header>
+</div>
+`;
